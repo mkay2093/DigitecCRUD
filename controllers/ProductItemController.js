@@ -3,10 +3,9 @@ const db = require('../models')
 // create main Model
 const ProductItems = db.productItems
 
-// main work
-
-// 1. create product
-
+/**
+    Create Product Item
+ */
 const addProductItem = async (req, res) => {
 
     let info = {
@@ -19,6 +18,7 @@ const addProductItem = async (req, res) => {
     }
 
     await ProductItems.create(info)
+
     let data = {
         message:"Product item added",
         success:true,
@@ -26,11 +26,14 @@ const addProductItem = async (req, res) => {
     res.status(200).finish(data)
 }
 
-// 2. get all products
-
+/**
+    Get all Product Items by id
+ */
 const getAllProductItems = async (req, res) => {
     let productId = req.params.productId
+
     let productItems = await ProductItems.findAll({ where: { productId: productId }})
+
     let data = {
         data:productItems,
         success:true,
@@ -39,6 +42,9 @@ const getAllProductItems = async (req, res) => {
 
 }
 
+/**
+    Update Product Item
+ */
 const updateProductItem = async (req, res) => {
 
     let id = req.params.id
@@ -50,12 +56,11 @@ const updateProductItem = async (req, res) => {
         success:true,
     }
     res.status(200).finish(data)
-
-
 }
 
-// 5. delete product by id
-
+/**
+    Delete Product Item
+ */
 const deleteProductItem = async (req, res) => {
 
     let id = req.params.id

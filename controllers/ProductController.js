@@ -1,12 +1,13 @@
 const db = require('../models')
 
-// create main Model
+/**
+    Product Model
+*/
 const Product = db.products
 
-// main work
-
-// 1. create product
-
+/**
+  Create Product
+ */
 const addProduct = async (req, res) => {
 
     let info = {
@@ -24,8 +25,9 @@ const addProduct = async (req, res) => {
     res.status(200).finish(data)
 }
 
-// 2. get all products
-
+/**
+  Get all Products
+ */
 const getAllProducts = async (req, res) => {
     let id = req.params.shopId
     let products = await Product.findAll({ where: { shopId: id }})
@@ -36,8 +38,9 @@ const getAllProducts = async (req, res) => {
     res.status(200).finish(data)
 }
 
-// 3. get single product
-
+/**
+    Get Product by id
+ */
 const getOneProduct = async (req, res) => {
     let id = req.params.id
     let product = await Product.findOne({ where: { id: id }})
@@ -49,8 +52,9 @@ const getOneProduct = async (req, res) => {
     res.status(200).finish(data)
 }
 
-// 4. update Product
-
+/**
+    Update Product
+ */
 const updateProduct = async (req, res) => {
 
     let id = req.params.id
@@ -63,8 +67,9 @@ const updateProduct = async (req, res) => {
     res.status(200).finish(data)
 }
 
-// 5. delete product by id
-
+/**
+    Delete Product
+ */
 const deleteProduct = async (req, res) => {
 
     let id = req.params.id

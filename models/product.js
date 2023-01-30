@@ -1,4 +1,3 @@
-const {Shop} = require('./shop')
 module.exports = (sequelize, DataTypes) => {
 
     const Product = sequelize.define("product", {
@@ -10,11 +9,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.TEXT
         },
         type:{
-            type:DataTypes.ENUM('shoes', 'shirts','jeans')
+            type:DataTypes.ENUM('shoes', 'shirts','jeans'),
+            allowNull: false
         }
     })
-
-
 
     return Product
 

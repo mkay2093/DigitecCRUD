@@ -1,12 +1,17 @@
 require('dotenv').config();
 const {Sequelize, DataTypes} = require('sequelize');
 
+/**
+ * Database Connection
+ * */
 const sequelize = new Sequelize(process.env.DB_DATABASE, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
     host: process.env.DB_HOST,
     dialect: 'mysql'
 });
 
-
+/**
+ * Check Connection
+ * */
 sequelize.authenticate()
     .then(() => {
         console.log('connected..')
@@ -23,6 +28,10 @@ db.products = require('./product.js')(sequelize, DataTypes)
 db.productItems = require('./productItem.js')(sequelize, DataTypes)
 db.shops = require('./shop.js')(sequelize, DataTypes)
 
+/**
+ * Manual add Shops
+ * */
+
 db.shops.bulkCreate([
     {
         title:'ZARA',
@@ -38,8 +47,15 @@ db.shops.bulkCreate([
     },
 ])
 
+/**
+ * Product Association
+ * */
 db.products.belongsTo(db.shops);
 db.productItems.belongsTo(db.products);
+
+/**
+ * Create tables by Models
+ * */
 
 db.sequelize.sync({ force: false })
     .then(() => {

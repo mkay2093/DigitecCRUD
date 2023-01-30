@@ -7,6 +7,5 @@ module.exports = async (req, res, next) => {
             res.status(data.errorCode ?? 500).json({success: false, error: data.error, message: data.message});
         }
     }
-
     next()
 };
